@@ -1,5 +1,6 @@
+
 import { describe, it, expect, vi, beforeEach } from 'vitest';
-import { fetchPokemonList } from '../data/api';
+import { fetchPokemonList } from './api';
 
 describe('fetchPokemonList', () => {
   beforeEach(() => {
@@ -34,6 +35,7 @@ describe('fetchPokemonList', () => {
         { name: 'charmeleon', url: 'https://pokeapi.co/api/v2/pokemon/5/' },
       ],
     };
+
 
     global.fetch = vi.fn().mockResolvedValue({
       ok: true,
