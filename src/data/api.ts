@@ -46,7 +46,7 @@ const fetchPokemonByID = async (pokemonIdOrName: string): Promise<Pokemon | null
         moves: (result.moves) ? result.moves : [],
         height: (result.height) ? result.height : -1,
         weight: (result.weight) ? result.weight : -1,
-        sprites: (result.sprites) ? result.sprites : { front_default: '', back_default: '' }
+        sprites: (result.sprites) ? result.sprites : { front_default: '', back_default: '' },
       };
 
       return newPokemon;

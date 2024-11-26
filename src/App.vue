@@ -9,8 +9,6 @@ import { usePokeStore } from './data/store'
     store.updatePokeList();
   }
 
-  const pokeList = store.pokeList;
-
 </script>
 
 <template>

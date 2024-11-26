@@ -15,11 +15,13 @@ function handleClick(pokemon: Pokemon) {
     <table>
         <thead>
             <tr>
+                <th>Image</th>
                 <th>Name</th>
             </tr>
         </thead>
         <tbody>
             <tr v-for="pokemon in store.pokemonDetailsList" :key="pokemon.name">
+                <td v-on:click="handleClick(pokemon)"><img :src="pokemon.sprites.front_default" v-alt="pokemon.name" /></td>
                 <td v-on:click="handleClick(pokemon)">{{ pokemon.name }}</td>
             </tr>
         </tbody>
