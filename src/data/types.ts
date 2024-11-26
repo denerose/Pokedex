@@ -52,4 +52,15 @@ export type PokeType = {
       [key: string]: string; // To support other sprite variations (like shiny)
     };
   };
+
+  export type PokemonLink = {
+    name: string;
+    url: string;
+  };
+
+  export type PokemonShort = {
+    name: string;
+    types: PokeType[];
+    sprite: string;
+  };
   
