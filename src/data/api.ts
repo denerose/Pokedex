@@ -29,6 +29,43 @@ const fetchPokemonByID = async (pokemonIdOrName: string): Promise<Pokemon | null
     }
   };
 
+  const fetchPokemonByURL = async (url: string): Promise<Pokemon> => {
+    try {
+      const response = await fetch(url);
+      if (!response.ok) {
+        throw new Error('Pokémon not found');
+      }
+
+      const result = await response.json();
+
+      const newPokemon: Pokemon = {
+        id: (result.id) ? result.id : -1,
+        name: (result.name) ? result.name : '',
+        types: (result.types) ? result.types : [],
+        abilities: (result.abilities) ? result.abilities : [],
+        moves: (result.moves) ? result.moves : [],
+        height: (result.height) ? result.height : -1,
+        weight: (result.weight) ? result.weight : -1,
+        sprites: (result.sprites) ? result.sprites : { front_default: '', back_default: '' }
+      };
+
+      return newPokemon;
+
+    } catch (error) {
+      console.error('Error fetching Pokémon:', error);
+      return {
+        id: -1,
+        name: '',
+        types: [],
+        abilities: [],
+        moves: [],
+        height: -1,
+        weight: -1,
+        sprites: { front_default: '', back_default: '' }
+      }
+    }
+  }
+
   const fetchPokemonList = async (limit?: number, offset?: number): Promise<PokemonLink[]> => {
 
     // set defaults for optional params
@@ -74,4 +111,4 @@ const fetchPokemonByID = async (pokemonIdOrName: string): Promise<Pokemon | null
     }
   };
 
-export { fetchPokemonByID, fetchPokemonList, fetchPokemonByType };
+export { fetchPokemonByID, fetchPokemonByURL, fetchPokemonList, fetchPokemonByType };
