@@ -1,5 +1,5 @@
 import { describe, it, expect, vi, beforeEach } from 'vitest';
-import { fetchPokemonList } from './api';
+import { fetchPokemonList } from '../data/api';
 
 describe('fetchPokemonList', () => {
   beforeEach(() => {
