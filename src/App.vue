@@ -6,15 +6,17 @@ import { usePokeStore } from './data/store'
   const store = usePokeStore();
 
   if (store.pokeList.length === 0) {
-    store.updatePokeList();
+    store.updatePokeStore();
   }
 
 </script>
 
 <template>
   <h1>Pokedex</h1>
-  <PokeCard />
-  <PokeList />
+  <main>
+    <PokeCard />
+    <PokeList />
+  </main>
 </template>
 
 <style scoped>

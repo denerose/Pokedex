@@ -9,6 +9,9 @@ export const usePokeStore = defineStore('pokemon', () => {
     const pokeList = ref<PokemonLink[]>([]);
     const pokemonDetailsList = ref<Pokemon[]>([]);
 
+    const page = ref<number>(1);
+    const totalPages = ref<number>(1);
+
     function setPokemon(value: Pokemon): void {
         pokemon.value = value;
     }
@@ -20,18 +23,21 @@ export const usePokeStore = defineStore('pokemon', () => {
         }
     }
 
-    function updatePokeList(): void {
+    function updatePokeStore(): void {
         fetchPokemonList().then((list) => {
             pokeList.value = list;
-            list.forEach((pokemon) => {
-                fetchPokemonByURL(pokemon.url).then((details: Pokemon) => {
-                    if (details && details.id != -1) { 
-                        pokemonDetailsList.value.push(details);
+            list.forEach((pokemonItem) => {
+                fetchPokemonByURL(pokemonItem.url).then((newPokemon: Pokemon) => {
+                    if (newPokemon && newPokemon.id != -1) { 
+                        pokemonDetailsList.value.push(newPokemon);
                     }
                 });
             });
             if (pokemon.value === null && pokemonDetailsList.value.length > 0) {
                 pokemon.value = pokemonDetailsList.value[0];
+            }
+            if (pokemonDetailsList.value.length > 0) {
+                totalPages.value = Math.ceil(pokemonDetailsList.value.length / 10);
             }
         });
     }
@@ -45,7 +51,7 @@ export const usePokeStore = defineStore('pokemon', () => {
         pokeList,
         pokemonDetailsList,
         setPokemon,
-        updatePokeList,
+        updatePokeStore,
         findPokemonByName,
     };
     
